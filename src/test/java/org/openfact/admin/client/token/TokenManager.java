@@ -1,4 +1,4 @@
-package org.sistcoop.token;
+package org.openfact.admin.client.token;
 
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
@@ -12,9 +12,6 @@ import javax.ws.rs.core.Form;
 
 import static org.keycloak.OAuth2Constants.*;
 
-/**
- * Created by carlosthe19916@sistcoop.com
- */
 public class TokenManager {
 
     private static final long DEFAULT_MIN_VALIDITY = 30;
@@ -57,7 +54,7 @@ public class TokenManager {
         Form form = new Form().param(GRANT_TYPE, accessTokenGrantType);
         if (PASSWORD.equals(accessTokenGrantType)) {
             form.param("username", config.getUsername())
-                    .param("password", config.getPassword());
+                .param("password", config.getPassword());
         }
 
         if (config.isPublicClient()) {
@@ -74,7 +71,7 @@ public class TokenManager {
 
     public AccessTokenResponse refreshToken() {
         Form form = new Form().param(GRANT_TYPE, REFRESH_TOKEN)
-                .param(REFRESH_TOKEN, currentToken.getRefreshToken());
+                              .param(REFRESH_TOKEN, currentToken.getRefreshToken());
 
         if (config.isPublicClient()) {
             form.param(CLIENT_ID, config.getClientId());

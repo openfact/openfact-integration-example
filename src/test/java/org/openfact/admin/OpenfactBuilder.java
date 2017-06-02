@@ -1,40 +1,17 @@
-package org.sistcoop;
+package org.openfact.admin;
 
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
-import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.keycloak.admin.client.Keycloak;
 
-/**
- * Provides a {@link Openfact} client builder with the ability to customize the underlying
- * {@link ResteasyClient RESTEasy client} used to communicate with the Openfact server.
- * <p>
- * <p>Example usage with a connection pool size of 20:</p>
- * <pre>
- *   Openfact openfact = OpenfactBuilder.builder()
- *     .serverUrl("https://openfact.example.com/openfact")
- *     .organization("organization")
- *     .keycloakClient(new Keycloak())
- *     .resteasyClient(new ResteasyClientBuilder().connectionPoolSize(20).build())
- *     .build();
- * </pre>
- *
- * @see ResteasyClientBuilder
- */
 public class OpenfactBuilder {
 
     private String serverUrl;
-    private String organization;
 
     private Keycloak keycloakClient;
     private ResteasyClient resteasyClient;
 
     public OpenfactBuilder serverUrl(String serverUrl) {
         this.serverUrl = serverUrl;
-        return this;
-    }
-
-    public OpenfactBuilder organization(String organization) {
-        this.organization = organization;
         return this;
     }
 
@@ -56,11 +33,11 @@ public class OpenfactBuilder {
             throw new IllegalStateException("serverUrl required");
         }
 
-        if (organization == null) {
-            throw new IllegalStateException("organization required");
+        if (keycloakClient == null) {
+            throw new IllegalStateException("keycloakClient required");
         }
 
-        return new Openfact(serverUrl, organization, keycloakClient, resteasyClient);
+        return new Openfact(serverUrl, keycloakClient, resteasyClient);
     }
 
     private OpenfactBuilder() {

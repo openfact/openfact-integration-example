@@ -1,4 +1,4 @@
-package org.sistcoop.token;
+package org.openfact.admin.client.token;
 
 import org.keycloak.representations.AccessTokenResponse;
 

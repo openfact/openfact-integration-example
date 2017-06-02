@@ -1,7 +1,0 @@
-{
-  "realm": "openfact",
-  "auth-server-url": "https://kcopenfact-softgreen.rhcloud.com/auth",
-  "ssl-required": "external",
-  "resource": "openfact-web-console",
-  "public-client": true
-}
