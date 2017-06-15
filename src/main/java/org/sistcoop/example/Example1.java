@@ -16,12 +16,14 @@ public class Example1 {
         // Openfact Authentication
         Keycloak keycloak = KeycloakBuilder.builder()
                 .serverUrl("http://keycloak-openfact.192.168.42.244.nip.io/auth")
-                .realm("myRealm")
-                .username("myUsername")
-                .password("myPassword")
+                .realm("ahren")
+                .username("admin")
+                .password("123456")
                 .clientId("openfact-client")
-                .clientSecret("myClientSecret")
+                .clientSecret("9df24011-daef-4c8f-8282-f82d101c90ff")
                 .build();
+
+        String accessTokenString = keycloak.tokenManager().getAccessTokenString();
 
         // Openfact Client
         OpenfactClient openfact = OpenfactClient.buildTarget(serverUrl, keycloak);
@@ -29,7 +31,25 @@ public class Example1 {
         // Listing all allowed organizations
         List<OrganizationRepresentation> organizations = openfact.organizations().findAll();
         for (OrganizationRepresentation organization : organizations) {
-            System.out.println(organization.getOrganization());
+            System.out.println("Organization " + organization.getOrganization());
+//            System.out.println("---------------------------------------------");
+//
+//            // Actualizando datos de una organizacion
+//            OrganizationResource organizationResource = openfact.organizations()
+//                    .organization(organization.getOrganization());
+//            OrganizationRepresentation patch = new OrganizationRepresentation();
+//            patch.setDescription("My Description");
+//            organizationResource.update(patch);
+//
+//            // Listando los documentos asociados a la organizacion
+//            DocumentsResource documentsResource = organizationResource.documents();
+//            SearchResultsRepresentation<DocumentRepresentation> documents = documentsResource.search("");
+//            System.out.println("Se encontraron " + documents.getTotalSize() + " documentos: ");
+//            for (DocumentRepresentation document : documents.getItems()) {
+//                System.out.println("ID:" + document.getDocumentId());
+//            }
+//
+//            System.out.println("---------------------------------------------");
         }
     }
 
